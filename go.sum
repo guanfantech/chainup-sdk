@@ -1,0 +1,4 @@
+github.com/farmerx/gorsa v0.0.0-20161211100049-3ae06f674f40 h1:OgoboV484kN/ngW4apHvSw8iy9YhhQusAKSLT8nGl94=
+github.com/farmerx/gorsa v0.0.0-20161211100049-3ae06f674f40/go.mod h1:Gdtd77IQrjXqFfiourWpNnE1jDPC4opZPDPxPLWFlr0=
+github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
+github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=

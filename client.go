@@ -1,4 +1,4 @@
-package main
+package chainup_sdk
 
 import (
 	"encoding/base64"

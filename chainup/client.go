@@ -42,7 +42,7 @@ type Client struct {
 // ClientOption type
 type ClientOption func(*Client) error
 
-var chainup *Client
+var UpClient *Client
 
 func New(env EnvType, appId, custodyPubKey, pubKey, privateKey string, cOptions ...ClientOption) (*Client, error) {
 	// check environment
@@ -54,17 +54,17 @@ func New(env EnvType, appId, custodyPubKey, pubKey, privateKey string, cOptions 
 		return nil, errors.New("invalid params")
 	}
 
-	// 設定chainup的公鑰進行解密
+	// 設定chainup的公鑰進行解密webhook
 	if err := gorsa.RSA.SetPublicKey(custodyPubKey); err != nil {
 		log.Fatalln(`set public key :`, err)
 	}
 
-	// 設定自己的私鑰進行加密
+	// 設定自己的私鑰進行加密requestData
 	if err := gorsa.RSA.SetPrivateKey(privateKey); err != nil {
 		log.Fatalln(`set private key :`, err)
 	}
 
-	chainup = &Client{
+	UpClient = &Client{
 		env:           env,
 		url:           chainupUrl[env],
 		appId:         appId,
@@ -73,13 +73,17 @@ func New(env EnvType, appId, custodyPubKey, pubKey, privateKey string, cOptions 
 		privateKey:    privateKey,
 		httpClient:    http.DefaultClient,
 	}
-	return chainup, nil
+	return UpClient, nil
 }
 
 type OriginResponse struct {
 	Code string `json:"code"` // 状态码
 	Msg  string `json:"msg"`  // 响应结果说明
 	Data string `json:"data"` // 具体响应数据，数据结构定义如下
+}
+
+func GetClient() (*Client, error) {
+	return nil, errors.New("need init chainup(call New func)")
 }
 
 // NewRequest method

@@ -1,5 +1,11 @@
 package webhook
 
+import (
+	"encoding/json"
+
+	"github.com/farmerx/gorsa"
+)
+
 type Withdraw struct {
 	Charset           string `json:"charset"`             // 必填 编码格式，无特殊情况，传参数utf-8
 	Version           string `json:"version"`             // 必填 接口版本号，无特殊情况，传参数v2
@@ -23,3 +29,17 @@ type Withdraw struct {
 }
 
 // SUCCESS表示成功，FAILURE表示失败 （注意此处返回参数无需进行加密）
+
+func GetWithdrawRequestData(dataStr string) (*Withdraw, error) {
+	jsonB, err := gorsa.RSA.PubKeyDECRYPT([]byte(dataStr))
+	if err != nil {
+		return nil, err
+	}
+	var data *Withdraw
+	err = json.Unmarshal(jsonB, data)
+	if err != nil {
+		return nil, err
+	}
+
+	return data, nil
+}

@@ -1,5 +1,11 @@
 package webhook
 
+import (
+	"encoding/json"
+
+	"github.com/farmerx/gorsa"
+)
+
 type WebhookWithdrawConfirmReq struct {
 	Time      string `json:"time"`       // 必填，当前时间戳
 	Charset   string `json:"charset"`    // 必填，编码格式，无特殊情况，传参数utf-8
@@ -15,4 +21,18 @@ type WebhookWithdrawConfirmReq struct {
 type WebhookWithdrawConfirmResponse struct {
 	CheckSum string `json:"check_sum"` // 必填 请求参数中的check_sum
 	Time     string `json:"time"`      // 必填，当前时间戳
+}
+
+func GetWebhookWithdrawConfirmRequestData(dataStr string) (*WebhookWithdrawConfirmReq, error) {
+	jsonB, err := gorsa.RSA.PubKeyDECRYPT([]byte(dataStr))
+	if err != nil {
+		return nil, err
+	}
+	var data *WebhookWithdrawConfirmReq
+	err = json.Unmarshal(jsonB, data)
+	if err != nil {
+		return nil, err
+	}
+
+	return data, nil
 }

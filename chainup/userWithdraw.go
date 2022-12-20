@@ -47,7 +47,6 @@ func (c *Client) Withdraw(requestId, fromUid, toAddress, amount, symbol string) 
 }
 
 // 同步提现记录
-type SyncWithdrawListResData []SyncWithdrawListResDataItem
 type SyncWithdrawListResDataItem struct {
 	RequestId         string `json:"request_id"`          // 必填	请求id,
 	Id                int    `json:"id"`                  // 必填	提现id
@@ -69,7 +68,7 @@ type SyncWithdrawListResDataItem struct {
 	Status            int    `json:"status"`              // 必填	提现状态: 0 风控审核中，1 支付中，2 审核拒绝，4 失败，5 成功， 6 已撤销，7 待KYT验证， 8 待人工审核(KYT风险等级过高)
 }
 
-func (c *Client) SyncWithdrawList(maxId string) (resData *SyncWithdrawListResData, err error) {
+func (c *Client) SyncWithdrawList(maxId string) (resData *[]SyncWithdrawListResDataItem, err error) {
 	type reqData struct {
 		Time    int64  `json:"time"`    // 必填	当前时间戳
 		Charset string `json:"charset"` // 必填	编码格式，无特殊情况，传参数utf-8
@@ -95,7 +94,6 @@ func (c *Client) SyncWithdrawList(maxId string) (resData *SyncWithdrawListResDat
 }
 
 // 批量获取提现记录
-type GetWithdrawListResData []GetWithdrawListResDataItem
 type GetWithdrawListResDataItem struct {
 	Request_id        string `json:"request_id"`          // 必填 请求id
 	Id                int    `json:"id"`                  // 必填 提现id
@@ -117,7 +115,7 @@ type GetWithdrawListResDataItem struct {
 	Status            int    `json:"status"`              // 必填 提现状态: 0 风控审核中，1 支付中，2 审核拒绝，4 失败，5 成功， 6 已撤销，7 待KYT验证， 8 待人工审核(KYT风险等级过高)
 }
 
-func (c *Client) GetWithdrawList(ids string) (resData *GetWithdrawListResData, err error) {
+func (c *Client) GetWithdrawList(ids string) (resData *[]GetWithdrawListResDataItem, err error) {
 	type reqData struct {
 		Time    int64  `json:"time"`    // 必填	当前时间戳
 		Charset string `json:"charset"` // 必填	编码格式，无特殊情况，传参数utf-8

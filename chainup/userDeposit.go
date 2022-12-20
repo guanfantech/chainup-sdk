@@ -10,7 +10,6 @@ import (
 )
 
 // 同步充值记录
-type SyncDepositListResData []SyncDepositListResDataItem
 type SyncDepositListResDataItem struct {
 	Id            int    `json:"id"`            // 充值唯一id
 	Uid           int    `json:"uid"`           // 充值用户id
@@ -25,7 +24,7 @@ type SyncDepositListResDataItem struct {
 	Status        int    `json:"status"`        // 0待确认，1 成功，2 失败，4 待KYT验证，5 待人工审核(KYT风险等级过高)，6 待人工审核(KYT充值熔断)
 }
 
-func (c *Client) SyncDepositList(maxId int64) (resData *SyncDepositListResData, err error) {
+func (c *Client) SyncDepositList(maxId int64) (resData *[]SyncDepositListResDataItem, err error) {
 	type reqData struct {
 		Time    int64  `json:"time"`    // 必填	当前时间戳
 		Charset string `json:"charset"` // 必填	编码格式，无特殊情况，传参数utf-8
@@ -51,7 +50,6 @@ func (c *Client) SyncDepositList(maxId int64) (resData *SyncDepositListResData, 
 }
 
 // 批量获取充值记录
-type GetDepositListResData []GetDepositListResDataItem
 type GetDepositListResDataItem struct {
 	Id            int    `json:"id"`            // 充值唯一id
 	Uid           int    `json:"uid"`           // 充值 用户id
@@ -66,7 +64,7 @@ type GetDepositListResDataItem struct {
 	Status        int    `json:"status"`        // 0待确认，1 成功，2 失败，4 待KYT验证，5 待人工审核(KYT风险等级过高)，6 待人工审核(KYT充值熔断)
 }
 
-func (c *Client) GetDepositList(ids []int) (resData *GetDepositListResData, err error) {
+func (c *Client) GetDepositList(ids []int) (resData *[]GetDepositListResDataItem, err error) {
 	type reqData struct {
 		Time    int64  `json:"time"`    // 必填	当前时间戳
 		Charset string `json:"charset"` // 必填	编码格式，无特殊情况，传参数utf-8
@@ -98,7 +96,6 @@ func (c *Client) GetDepositList(ids []int) (resData *GetDepositListResData, err 
 
 // 获取归集矿工费
 // 账户类型的币种充值后需要进行归集，UTXO无归集矿工费费用
-type SyncMinerFeeListResData []SyncMinerFeeListResDataItem
 type SyncMinerFeeListResDataItem struct {
 	Id              int    `json:"id"`               // 必填 归集唯一ID
 	Symbol          string `json:"symbol"`           // 必填 币种
@@ -117,7 +114,7 @@ type SyncMinerFeeListResDataItem struct {
 	Email           string `json:"email"`            // 必填 邮箱
 }
 
-func (c *Client) SyncMinerFeeList(maxId int64) (resData *SyncMinerFeeListResData, err error) {
+func (c *Client) SyncMinerFeeList(maxId int64) (resData *[]SyncMinerFeeListResDataItem, err error) {
 	type reqData struct {
 		Time    int64  `json:"time"`    // 必填	当前时间戳
 		Charset string `json:"charset"` // 必填	编码格式，无特殊情况，传参数utf-8

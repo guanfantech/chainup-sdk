@@ -6,6 +6,13 @@ import (
 	"github.com/farmerx/gorsa"
 )
 
+// 注：Custody系统的异步回调是当每笔订单最终态时才会触发，每日最多发送5次；
+// 定时任务：总计回调五次
+// 通知时间：第一次1s, 第二次2min，第三次8min，第四次32min，第五次128min
+// 回调逻辑：
+// 如果回调成功，更新回调状态；
+// 如果回调失败，继续回调，更新下次回调间隔时间；
+// 当回调失败达到5次，停止回调
 type Deposit struct {
 	Charset       string `json:"charset"`       // 必填 编码格式，无特殊情况，传参数utf-8
 	Version       string `json:"version"`       // 必填 接口版本号，无特殊情况，传参数v2
@@ -25,7 +32,11 @@ type Deposit struct {
 
 // SUCCESS表示成功，FAILURE表示失败 （注意此处返回参数无需进行加密）
 
-func GetDepositRequestData(dataStr string) (*Deposit, error) {
+func GetDepositRequestData(custodyPubKey string, dataStr string) (*Deposit, error) {
+	err := gorsa.RSA.SetPublicKey(custodyPubKey)
+	if err != nil {
+		return nil, err
+	}
 	jsonB, err := gorsa.RSA.PubKeyDECRYPT([]byte(dataStr))
 	if err != nil {
 		return nil, err

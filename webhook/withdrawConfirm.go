@@ -23,7 +23,12 @@ type WebhookWithdrawConfirmResponse struct {
 	Time     string `json:"time"`      // 必填，当前时间戳
 }
 
-func GetWebhookWithdrawConfirmRequestData(dataStr string) (*WebhookWithdrawConfirmReq, error) {
+func GetWebhookWithdrawConfirmRequestData(custodyPubKey string, dataStr string) (*WebhookWithdrawConfirmReq, error) {
+	err := gorsa.RSA.SetPublicKey(custodyPubKey)
+	if err != nil {
+		return nil, err
+	}
+
 	jsonB, err := gorsa.RSA.PubKeyDECRYPT([]byte(dataStr))
 	if err != nil {
 		return nil, err

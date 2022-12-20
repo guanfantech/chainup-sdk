@@ -43,7 +43,6 @@ func (c *Client) GetUserInfo(country, mobile, email string) (resData *GetUserInf
 }
 
 // 获取支持的币种列表
-type GetCoinListResData []GetCoinListResDataItem
 type GetCoinListResDataItem struct {
 	Symbol              string `json:"symbol"`               // 币种（调用提币的接口，及任何查询接口时务必使用此字段返回的值）
 	Icon                string `json:"icon"`                 // 币种icon
@@ -60,7 +59,7 @@ type GetCoinListResDataItem struct {
 	SupportToken        string `json:"support_token"`        // 是否支持token币，0不支持1支持,主链币才有值,代币为空
 }
 
-func (c *Client) GetCoinList() (resData *GetCoinListResData, err error) {
+func (c *Client) GetCoinList() (resData *[]GetCoinListResDataItem, err error) {
 	type reqData struct {
 		Time    int64  `json:"time"`    // 必填	当前时间戳
 		Charset string `json:"charset"` // 必填	编码格式，无特殊情况，传参数utf-8

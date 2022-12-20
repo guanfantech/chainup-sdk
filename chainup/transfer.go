@@ -88,7 +88,6 @@ func (c *Client) TransferCheck(requestId, amount, symbol, to, checkSum, remark s
 }
 
 // 批量获取提现记录
-type GetTransferListResData []GetTransferListResDataItem
 type GetTransferListResDataItem struct {
 	Id        string `json:"id"`         // 请求唯一标识，最多支持64位
 	Symbol    string `json:"symbol"`     // 币种
@@ -101,7 +100,7 @@ type GetTransferListResDataItem struct {
 	Rremark   string `json:"remark"`     // 最大支持32字符
 }
 
-func (c *Client) GetTransferList(ids, idsType string) (resData *GetTransferListResData, err error) {
+func (c *Client) GetTransferList(ids, idsType string) (resData *[]GetTransferListResDataItem, err error) {
 	type reqData struct {
 		Time    int64  `json:"time"`     // 必填 当前时间戳
 		Charset string `json:"charset"`  // 必填 编码格式，无特殊情况，传参数utf-8
@@ -130,7 +129,6 @@ func (c *Client) GetTransferList(ids, idsType string) (resData *GetTransferListR
 
 // 同步转账记录
 // 同步所有转账记录（分页）
-type SyncTransferListResData []SyncTransferListResDataItem
 type SyncTransferListResDataItem struct {
 	Id        string `json:"id"`         // 请求唯一标识，最多支持64位
 	Symbol    string `json:"symbol"`     // 币种
@@ -143,7 +141,7 @@ type SyncTransferListResDataItem struct {
 	Rremark   string `json:"remark"`     // 最大支持32字符
 }
 
-func (c *Client) SyncTransferList(maxId string) (resData *SyncTransferListResData, err error) {
+func (c *Client) SyncTransferList(maxId string) (resData *[]SyncTransferListResDataItem, err error) {
 	type reqData struct {
 		Time    int64  `json:"time"`    // 必填 当前时间戳
 		Charset string `json:"charset"` // 必填 编码格式，无特殊情况，传参数utf-8

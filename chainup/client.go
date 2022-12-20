@@ -39,12 +39,7 @@ type Client struct {
 	httpClient    *http.Client // default http.DefaultClient
 }
 
-// ClientOption type
-type ClientOption func(*Client) error
-
-var UpClient *Client
-
-func New(env EnvType, appId, custodyPubKey, pubKey, privateKey string, cOptions ...ClientOption) (*Client, error) {
+func New(env EnvType, appId, custodyPubKey, pubKey, privateKey string) (*Client, error) {
 	// check environment
 	if env != EnvDev && env != EnvProd {
 		return nil, errors.New("invalid environment")
@@ -64,7 +59,7 @@ func New(env EnvType, appId, custodyPubKey, pubKey, privateKey string, cOptions 
 		log.Fatalln(`set private key :`, err)
 	}
 
-	UpClient = &Client{
+	return &Client{
 		env:           env,
 		url:           chainupUrl[env],
 		appId:         appId,
@@ -72,8 +67,7 @@ func New(env EnvType, appId, custodyPubKey, pubKey, privateKey string, cOptions 
 		pubKey:        pubKey,
 		privateKey:    privateKey,
 		httpClient:    http.DefaultClient,
-	}
-	return UpClient, nil
+	}, nil
 }
 
 type OriginResponse struct {
@@ -99,6 +93,12 @@ func (c *Client) newRequest(route api.RouteDetail, requestData interface{}) (*ht
 
 		return nil, nil, errors.WithStack(err)
 	}
+
+	// 設定自己的私鑰進行加密requestData
+	if err := gorsa.RSA.SetPrivateKey(c.privateKey); err != nil {
+		log.Fatalln(`set private key :`, err)
+	}
+
 	prienctypt, err := gorsa.RSA.PriKeyENCTYPT(dataByte)
 	if err != nil {
 

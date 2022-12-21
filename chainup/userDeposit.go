@@ -15,8 +15,8 @@ type SyncDepositListResDataItem struct {
 	Uid           int    `json:"uid"`           // 充值用户id
 	Symbol        string `json:"symbol"`        // 币种
 	Amount        string `json:"amount"`        // 充值金额
-	CreatedAt     string `json:"created_at"`    // 创建时间
-	UpdatedAt     string `json:"updated_at"`    // 修改时间
+	CreatedAt     uint64 `json:"created_at"`    // 创建时间
+	UpdatedAt     uint64 `json:"updated_at"`    // 修改时间
 	Txid          string `json:"txid"`          // 区块链交易ID
 	Confirmations int    `json:"confirmations"` // 区块链确认数
 	AddressFrom   string `json:"address_from"`  // 来源地址
@@ -55,8 +55,8 @@ type GetDepositListResDataItem struct {
 	Uid           int    `json:"uid"`           // 充值 用户id
 	Symbol        string `json:"symbol"`        // 币种
 	Amount        string `json:"amount"`        // 充值金额
-	CreatedAt     string `json:"created_at"`    // 创建时间,时间戳
-	UpdatedAt     string `json:"updated_at"`    // 修改时间，时间戳
+	CreatedAt     uint64 `json:"created_at"`    // 创建时间,时间戳
+	UpdatedAt     uint64 `json:"updated_at"`    // 修改时间，时间戳
 	Txid          string `json:"txid"`          // 区块链交易ID
 	Confirmations int    `json:"confirmations"` // 区块链确认数
 	AddressFrom   string `json:"address_from"`  // 来源地址
@@ -101,8 +101,8 @@ type SyncMinerFeeListResDataItem struct {
 	Symbol          string `json:"symbol"`           // 必填 币种
 	Amount          string `json:"amount"`           // 必填 归集金额
 	Fee             string `json:"fee"`              // 必填 归集手续费
-	CreatedAt       string `json:"created_at"`       // 必填 创建时间
-	UpdatedAt       string `json:"updated_at"`       // 必填 修改时间
+	CreatedAt       uint64 `json:"created_at"`       // 必填 创建时间
+	UpdatedAt       uint64 `json:"updated_at"`       // 必填 修改时间
 	Txid            string `json:"txid"`             // 必填 区块链交易ID
 	Confirmations   int    `json:"confirmations"`    // 必填 区块链确认数
 	Status          int    `json:"status"`           // 必填 0待确认，1 成功，2 失败，4 待KYT验证，5 待人工审核(KYT风险等级过高)，6 待人工审核(KYT充值熔断)

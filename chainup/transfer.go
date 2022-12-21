@@ -94,7 +94,7 @@ type GetTransferListResDataItem struct {
 	Amount    string `json:"amount"`     // 转账数量，包含转账手续费
 	From      string `json:"from"`       // 转出商户，转出商户APPID
 	To        string `json:"to"`         // 转入商户，转入商户APPID
-	CreatedAt string `json:"created_at"` // 创建时间
+	CreatedAt uint64 `json:"created_at"` // 创建时间
 	RequestId string `json:"request_id"` // 三方ID
 	Receipt   string `json:"receipt"`    // 转账凭证
 	Rremark   string `json:"remark"`     // 最大支持32字符
@@ -135,7 +135,7 @@ type SyncTransferListResDataItem struct {
 	Amount    string `json:"amount"`     // 转账数量，包含转账手续费
 	From      string `json:"from"`       // 转出商户，转出商户APPID
 	To        string `json:"to"`         // 转入商户，转入商户APPID
-	CreatedAt string `json:"created_at"` // 创建时间
+	CreatedAt uint64 `json:"created_at"` // 创建时间
 	RequestId string `json:"request_id"` // 三方ID
 	Receipt   string `json:"receipt"`    // 转账凭证
 	Rremark   string `json:"remark"`     // 最大支持32字符

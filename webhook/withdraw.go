@@ -16,8 +16,8 @@ type Withdraw struct {
 	Symbol        string `json:"symbol"`        // 必填 币种
 	Amount        string `json:"amount"`        // 必填 提现金额
 	AddressTo     string `json:"address_to"`    // 必填 充值地址
-	CreatedAt     string `json:"created_at"`    // 必填 创建时间
-	UpdatedAt     string `json:"updated_at"`    // 必填 修改时间
+	CreatedAt     uint64 `json:"created_at"`    // 必填 创建时间
+	UpdatedAt     uint64 `json:"updated_at"`    // 必填 修改时间
 	Txid          string `json:"txid"`          // 必填 区块链交易ID
 	Confirmations string `json:"confirmations"` // 必填 区块链确认数
 	Status        string `json:"status"`        // 必填 充值状态 0待确认，1 成功，2 失败，4 待KYT验证，5 待人工审核(KYT风险等级过高)，6 待人工审核(KYT充值熔断)

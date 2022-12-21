@@ -7,7 +7,7 @@ import (
 )
 
 type WebhookWithdrawConfirmReq struct {
-	Time      string `json:"time"`       // 必填，当前时间戳
+	Time      uint64 `json:"time"`       // 必填，当前时间戳
 	Charset   string `json:"charset"`    // 必填，编码格式，无特殊情况，传参数utf-8
 	Version   string `json:"version"`    // 必填，接口版本号，无特殊情况，传参数v2
 	RequestId string `json:"request_id"` // 必填，请求唯一标识
@@ -20,7 +20,7 @@ type WebhookWithdrawConfirmReq struct {
 
 type WebhookWithdrawConfirmResponse struct {
 	CheckSum string `json:"check_sum"` // 必填 请求参数中的check_sum
-	Time     string `json:"time"`      // 必填，当前时间戳
+	Time     uint64 `json:"time"`      // 必填，当前时间戳
 }
 
 func GetWebhookWithdrawConfirmRequestData(custodyPubKey string, dataStr string) (*WebhookWithdrawConfirmReq, error) {

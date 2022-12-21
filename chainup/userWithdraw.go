@@ -57,8 +57,8 @@ type SyncWithdrawListResDataItem struct {
 	WithdrawFee       string `json:"withdraw_fee"`        // 必填	提现手续费
 	FeeSymbol         string `json:"fee_symbol"`          // 必填	挖矿手续费币种
 	RealFee           string `json:"real_fee"`            // 必填	矿工费
-	CreatedAt         string `json:"created_at"`          // 必填	创建时间
-	UpdatedAt         string `json:"updated_at"`          // 必填	修改时间
+	CreatedAt         uint64 `json:"created_at"`          // 必填	创建时间
+	UpdatedAt         uint64 `json:"updated_at"`          // 必填	修改时间
 	AddressFrom       string `json:"address_from"`        // 必填	来源地址
 	AddressTo         string `json:"address_to"`          // 必填	到账地址
 	Txid              string `json:"txid"`                // 必填	区块链交易ID
@@ -104,8 +104,8 @@ type GetWithdrawListResDataItem struct {
 	WithdrawFee       string `json:"withdraw_fee"`        // 必填 提现手续费
 	FeeSymbol         string `json:"fee_symbol"`          // 必填 挖矿手续费币种
 	RealFee           string `json:"real_fee"`            // 必填 矿工费
-	CreatedAt         string `json:"created_at"`          // 必填 创建时间,
-	UpdatedAt         string `json:"updated_at"`          // 必填 修改时间
+	CreatedAt         uint64 `json:"created_at"`          // 必填 创建时间,
+	UpdatedAt         uint64 `json:"updated_at"`          // 必填 修改时间
 	AddressFrom       string `json:"address_from"`        // 必填 来源地址
 	AddressTo         string `json:"address_to"`          // 必填 到账地址
 	Txid              string `json:"txid"`                // 必填 区块链交易ID
